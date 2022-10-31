@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link href="https://fonts.googleapis.com/css2?family=Monoton&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            height: 100vh;
+            background: url("./bg.png") center no-repeat;
+            background-size: cover;
+        }
+
+        .neon-wrap {
+            width: 100vw;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            text-align: center;
+        }
+
+
+        .neon-text {
+            font-family: 'Monoton', cursive;
+            font-size: 100px;
+            color: #ffeb3b;
+            text-shadow: -3px 0px 5px #ffeb3b,
+                0px 0px 5px #ffeb3b;
+        }
+
+        .neon-blink {
+            animation: neon 4s infinite;
+        }
+
+
+        .neon-by {
+            font-size: 24px;
+            color: #e8a8a8;
+            text-shadow: -3px 0px 5px #e8a8a8,
+                0px 0px 5px #e8a8a8;
+            position: absolute;
+            top: 170%;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+
+        .neon-clock {
+            position: relative;
+            font-family: 'Monoton', cursive;
+            font-size: 120px;
+            color: #8f5c5c;
+            text-shadow: -3px 0px 5px #8f5c5c,
+                0px 0px 5px #8f5c5c;
+        }
+
+        .period {
+            position: absolute;
+            top: 44%;
+            left: 67%;
+            font-size: 50px;
+            color: #bbdbfb;
+            text-shadow: -3px 0px 5px #bbdbfb,
+                0px 0px 2px #bbdbfb;
+        }
+
+        @keyframes neon {
+
+            0%,
+            50% {
+                color: #333;
+                text-shadow: -3px 0px 5px #333,
+                    0px 0px 2px #333;
+            }
+
+            25%,
+            80%,
+            100% {
+                color: #bbdbfb;
+                text-shadow: -3px 0px 5px #bbdbfb,
+                    0px 0px 2px #bbdbfb;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="neon-wrap">
+        <div class="neon-text">
+            CL<span class="neon-blink">O</span>C<span class="neon-blink">K</span>
+        </div>
+        <div class="neon-clock">
+            <span class="hour">00</span> :
+            <span class="min">00</span> :
+            <span class="sec">00</span>
+            <span class="period">AM</span>
+        </div>
+        <div class="neon-by">by Max</div>
+    </div>
+    <script>
+        const hour = document.querySelector('.hour')
+        const min = document.querySelector('.min')
+        const sec = document.querySelector('.sec')
+        const period = document.querySelector('.period')
+        setInterval(() => {
+            const now = new Date()
+            hour.innerText = now.getHours()
+            min.innerText = now.getMinutes()
+            sec.innerText = now.getSeconds()
+            if (hour >= 12) {
+                period.innerText = "PM"
+                hour.innerText - 12
+            } else period.innerText = "AM"
+            if (hour.innerText < 10) hour.innerText = '0' + hour.innerText
+            if (min.innerText < 10) min.innerText = '0' + min.innerText
+            if (sec.innerText < 10) sec.innerText = '0' + sec.innerText
+        }, 200); 
+    </script>
+</body>
+
+</html>
