@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      background-color: rgb(34, 43, 47);
+      min-width: 100vh;
+    }
+
+    /* 整個時鐘 */
+    #clock {
+      width: 500px;
+      height: 500px;
+      margin: auto;
+      position: relative;
+      top: calc(50vh - 250px);
+      background: url("clock.png");
+      background-size: cover;
+      border: 3px solid rgb(9, 25, 33);
+      border-radius: 50%;
+      box-shadow: 0 -15px 15px rgba(255, 255, 255, 0.05),
+        inset 0 -10px 15px rgba(255, 255, 255, 0.05),
+        0 15px 15px rgba(0, 0, 0, 0.3),
+        inset 0 15px 15px rgba(0, 0, 0, 0.3);
+    }
+
+    /* 中間小圓點 */
+    #clock::before {
+      content: "";
+      background: rgb(34, 38, 41);
+      width: 20px;
+      height: 20px;
+      margin: auto;
+      position: absolute;
+      border-radius: 50%;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      z-index: 5;
+    }
+
+    .hand {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+    }
+
+    .hour::after {
+      content: "";
+      width: 8.5px;
+      height: 25%;
+      background: rgb(145, 145, 145);
+      position: absolute;
+      left: 50%;
+      bottom: 50%;
+      transform: translate(-50%, 0);
+      border-radius: 50% 50% 0 0;
+      z-index: 1;
+    }
+
+    .min::after {
+      content: "";
+      width: 7px;
+      height: 40%;
+      background: rgb(145, 145, 145);
+      position: absolute;
+      bottom: 50%;
+      left: 50%;
+      transform: translate(-50%, 0);
+      border-radius: 50% 50% 0 0;
+      z-index: 2;
+    }
+
+    .sec::after {
+      content: "";
+      width: 4px;
+      height: 35%;
+      background: rgb(145, 145, 145);
+      position: absolute;
+      bottom: 50%;
+      left: 50%;
+      transform: translate(-50%, 0);
+      border-radius: 50% 50% 0 0;
+      z-index: 3;
+    }
+  </style>
+</head>
+
+<body>
+  <div id="clock">
+    <div class="hand hour"></div>
+    <div class="hand min"></div>
+    <div class="hand sec"></div>
+  </div>
+  <script>
+    const hour = document.querySelector('.hour')
+    const min = document.querySelector('.min')
+    const sec = document.querySelector('.sec')
+
+    // setInterval(() => {
+    //   const now = new Date()
+    //   // 一個圓 360度 / 一圈 12 小時 = 30 ， - 90度 補正指針
+    //   // 因CSS 0度 是橫的 時鐘 0 點是直的 中間差 90 度要補正
+    //   hour.style.transform = `rotate(${now.getHours() * 30 - 90}deg)`
+    //   // 一個圓 360度 / 一小時 60分鐘  = 6 ， - 90度 補正指針
+    //   min.style.transform = `rotate(${now.getMinutes() * 6 - 90}deg)`
+    //   // 一個圓 360度 / 一分鐘 60秒  = 6 ， - 90度 補正指針
+    //   sec.style.transform = `rotate(${now.getSeconds() * 6 - 90}deg)`
+    // }, 1000);
+
+
+    setInterval(() => {
+      const now = new Date()
+      hour.style.transform = `rotate(${now.getHours() / 12 * 360}deg)`
+      min.style.transform = `rotate(${now.getMinutes() / 60 * 360}deg)`
+      sec.style.transform = `rotate(${now.getSeconds() / 60 * 360}deg)`
+    }, 200);
+
+  </script>
+</body>
+
+</html>
